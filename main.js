@@ -95,7 +95,7 @@ function assign_groups(ev) {
         tbody.appendChild(clone)
     }
     let encoded_dict = btoa(JSON.stringify(assignment_dict));
-    save_link.href = url_object.origin + "/display.html#" + encoded_dict;
+    save_link.href = url_object.href + "/display.html#" + encoded_dict;
 }
 
 function resort_problems(ev) {
