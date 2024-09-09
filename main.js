@@ -22,106 +22,106 @@ function assign_groups(ev) {
     const groups_textbox = document.querySelector("#groups").value;
     let groups = groups_textbox.split(/\r?\n/);
     assignment_dict = {
-        'problems': [],
-        'groups': []
+        'p': [],
+        'g': []
      }
      problems.forEach(function(value, i) {
         if (value.length > 0){
-            assignment_dict['problems'].push({
-                'problem': value,
-                'position': i
+            assignment_dict['p'].push({
+                'p': value,
+                'n': i
             });
         }
      });
      groups.forEach(function(value, i) {
         if (value.length > 0){
-            assignment_dict['groups'].push({
-                'group': value,
-                'position': i
+            assignment_dict['g'].push({
+                'g': value,
+                'n': i
             });
         }
      });
-     if (assignment_dict['groups'].length > assignment_dict['problems'].length) {
+     if (assignment_dict['g'].length > assignment_dict['p'].length) {
         const double_assign = (document.querySelector('input[name="more-groups"]:checked').value == 'multiple-groups');
-        const diff = assignment_dict['groups'].length - assignment_dict['problems'].length;
+        const diff = assignment_dict['g'].length - assignment_dict['p'].length;
         if (double_assign) {
-            let double_assigned = randomize_order(assignment_dict['problems']).slice(0, diff);
+            let double_assigned = randomize_order(assignment_dict['p']).slice(0, diff);
             for (let d of double_assigned) {
-                assignment_dict['problems'].push(d);
+                assignment_dict['p'].push(d);
             }
         }
         else {
             for (let i=0; i<diff; i++) {
-                assignment_dict['problems'].push({
-                    'problem': '',
-                    'position': problems.length+1
+                assignment_dict['p'].push({
+                    'p': '',
+                    'n': problems.length+1
                 });
             }
         }
         
     }
-    if (assignment_dict['groups'].length < assignment_dict['problems'].length) {
+    if (assignment_dict['g'].length < assignment_dict['p'].length) {
         const double_assign = (document.querySelector('input[name="more-probs"]:checked').value == 'multiple-problems');
-        const diff = assignment_dict['problems'].length - assignment_dict['groups'].length;
+        const diff = assignment_dict['p'].length - assignment_dict['g'].length;
         if (double_assign) {
-            let double_assigned = randomize_order(assignment_dict['groups']).slice(0, diff);
+            let double_assigned = randomize_order(assignment_dict['g']).slice(0, diff);
             for (let d of double_assigned) {
-                assignment_dict['groups'].push(d);
+                assignment_dict['g'].push(d);
             }
         }
         else {
             for (let i=0; i<diff; i++) {
-                assignment_dict['groups'].push({
-                    'group': '',
-                    'position': groups.length+1
+                assignment_dict['g'].push({
+                    'g': '',
+                    'n': groups.length+1
                 });
             }
         }
     }
-    let randomized_problems = randomize_order(assignment_dict['problems']);
-    assignment_dict['groups'].forEach(function (value, i) {
-        value['problem'] = randomized_problems[i].problem;
-        randomized_problems[i]['group'] = value.group;
+    let randomized_problems = randomize_order(assignment_dict['p']);
+    assignment_dict['g'].forEach(function (value, i) {
+        value['p'] = randomized_problems[i].p;
+        randomized_problems[i]['g'] = value.g;
     })
-    assignment_dict['problems'].sort(function(a,b) {
-        return a.position - b.position;
+    assignment_dict['p'].sort(function(a,b) {
+        return a.n - b.n;
     })
     tbody.innerHTML = "";
-    for (let p of assignment_dict['problems']) {
+    for (let p of assignment_dict['p']) {
         const clone = template.content.cloneNode(true)
         let td = clone.querySelectorAll("td")
-        td[0].textContent = p['problem']
-        td[1].textContent = p['group']
+        td[0].textContent = p['p']
+        td[1].textContent = p['g']
         tbody.appendChild(clone)
     }
     let encoded_dict = btoa(JSON.stringify(assignment_dict));
-    save_link.href = url_object.href + "/display.html#" + encoded_dict;
+    save_link.href = url_object.href + "display.html#" + encoded_dict;
 }
 
 function resort_problems(ev) {
-    assignment_dict['problems'].sort(function(a,b) {
-        return a.position - b.position;
+    assignment_dict['p'].sort(function(a,b) {
+        return a.n - b.n;
     })
     tbody.innerHTML = "";
-    for (let p of assignment_dict['problems']) {
+    for (let p of assignment_dict['p']) {
         const clone = template.content.cloneNode(true)
         let td = clone.querySelectorAll("td")
-        td[0].textContent = p['problem']
-        td[1].textContent = p['group']
+        td[0].textContent = p['p']
+        td[1].textContent = p['g']
         tbody.appendChild(clone)
     }
 }
 
 function resort_groups(ev) {
-    assignment_dict['groups'].sort(function(a,b) {
-        return a.position-b.position;
+    assignment_dict['g'].sort(function(a,b) {
+        return a.n-b.n;
     })
     tbody.innerHTML = "";
-    for (let g of assignment_dict['groups']){
+    for (let g of assignment_dict['g']){
         const clone = template.content.cloneNode(true)
         let td = clone.querySelectorAll("td")
-        td[0].textContent = g['problem']
-        td[1].textContent = g['group']
+        td[0].textContent = g['p']
+        td[1].textContent = g['g']
         tbody.appendChild(clone)
     }
 }

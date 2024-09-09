@@ -6,29 +6,29 @@ const template = document.querySelector("#output-row");
 
 
 function resort_problems(ev) {
-    assignment_dict['problems'].sort(function(a,b) {
-        return a.position - b.position;
+    assignment_dict['p'].sort(function(a,b) {
+        return a.n - b.n;
     })
     tbody.innerHTML = "";
-    for (let p of assignment_dict['problems']) {
+    for (let p of assignment_dict['p']) {
         const clone = template.content.cloneNode(true)
         let td = clone.querySelectorAll("td")
-        td[0].textContent = p['problem']
-        td[1].textContent = p['group']
+        td[0].textContent = p['p']
+        td[1].textContent = p['g']
         tbody.appendChild(clone)
     }
 }
 
 function resort_groups(ev) {
-    assignment_dict['groups'].sort(function(a,b) {
-        return a.position-b.position;
+    assignment_dict['g'].sort(function(a,b) {
+        return a.n-b.n;
     })
     tbody.innerHTML = "";
-    for (let g of assignment_dict['groups']){
+    for (let g of assignment_dict['g']){
         const clone = template.content.cloneNode(true)
         let td = clone.querySelectorAll("td")
-        td[0].textContent = g['problem']
-        td[1].textContent = g['group']
+        td[0].textContent = g['p']
+        td[1].textContent = g['g']
         tbody.appendChild(clone)
     }
 }
