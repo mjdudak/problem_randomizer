@@ -48,7 +48,6 @@ function assign_groups(ev) {
             let double_assigned = randomize_order(assignment_dict['p']).slice(0, diff);
             for (let d of double_assigned) {
                 const new_p = structuredClone(d);
-                new_p['n'] = problems.length+1;
                 assignment_dict['p'].push(new_p);
             }
         }
@@ -69,7 +68,6 @@ function assign_groups(ev) {
             let double_assigned = randomize_order(assignment_dict['g']).slice(0, diff);
             for (let d of double_assigned) {
                 const new_g = structuredClone(d);
-                new_g['n'] = groups.length+1;
                 assignment_dict['g'].push(new_g);
             }
         }
