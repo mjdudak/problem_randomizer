@@ -131,3 +131,20 @@ function resort_groups(ev) {
 document.querySelector("#output").addEventListener("click", assign_groups);
 document.querySelector("#problem-table-header").addEventListener("click", resort_problems);
 document.querySelector("#group-table-header").addEventListener("click", resort_groups);
+
+
+function fill_with_7(ev) {
+    const groups_textbox = document.querySelector("#groups");
+    groups_textbox.value = "";
+    groups_textbox.value = "Table 1\nTable 2\nTable 3\nTable 4\nTable 5\nTable 6\nTable 7";
+}
+
+function fill_with_6(ev) {
+    const groups_textbox = document.querySelector("#groups");
+    groups_textbox.value = "";
+    groups_textbox.value = "Table 1\nTable 2\nTable 3\nTable 4\nTable 5\nTable 6";
+}
+
+
+document.querySelector("#id_7-tables").addEventListener("click", fill_with_7)
+document.querySelector("#id_6-tables").addEventListener("click", fill_with_6)
