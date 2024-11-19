@@ -49,6 +49,7 @@ function assign_groups(ev) {
             for (let d of double_assigned) {
                 assignment_dict['p'].push(d);
             }
+            console.log(assignment_dict)
         }
         else {
             for (let i=0; i<diff; i++) {
@@ -80,6 +81,8 @@ function assign_groups(ev) {
     }
     let randomized_problems = randomize_order(assignment_dict['p']);
     assignment_dict['g'].forEach(function (value, i) {
+        console.log(i)
+        console.log(value, randomized_problems[i])
         value['p'] = randomized_problems[i].p;
         randomized_problems[i]['g'] = value.g;
     })
