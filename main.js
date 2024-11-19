@@ -50,7 +50,6 @@ function assign_groups(ev) {
                 const new_p = structuredClone(d);
                 assignment_dict['p'].push(new_p);
             }
-            console.log(assignment_dict)
         }
         else {
             for (let i=0; i<diff; i++) {
@@ -83,8 +82,6 @@ function assign_groups(ev) {
     }
     let randomized_problems = randomize_order(assignment_dict['p']);
     assignment_dict['g'].forEach(function (value, i) {
-        console.log(i)
-        console.log(value, randomized_problems[i])
         value['p'] = randomized_problems[i].p;
         randomized_problems[i]['g'] = value.g;
     })
